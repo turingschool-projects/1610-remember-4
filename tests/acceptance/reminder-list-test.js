@@ -13,12 +13,12 @@ test('viewing the homepage', function(assert) {
   visit('/');
 
   andThen(function() {
-    assert.equal(currentURL(), '/');
+    assert.equal(currentURL(), '/reminders');
     assert.equal(Ember.$('.spec-reminder-item').length, 5);
   });
 });
 
-test('clicking on an individual item', function(assert) {
+test.skip('clicking on an individual item', function(assert) {
   server.createList('reminder', 5);
 
   visit('/');
