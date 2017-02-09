@@ -5,9 +5,17 @@ moduleForModel('reminder', 'Unit | Model | reminder', {
   needs: []
 });
 
-test('each reminder should have a title, date and note', function(assert) {
-  let reminders = this.subject({title: 'some lorem ipsum', date: 'Tue Feb 07 2017 02:43:02 GMT-0700 (MST)', notes: 'some more lorem ipsum'});
+test('each reminder should have a title', function(assert) {
+  let reminders = this.subject({title: 'some lorem ipsum'});
   assert.equal(reminders.get('title'), 'some lorem ipsum', 'this is the reminder title')
+});
+
+test('each reminder should have a date', function(assert) {
+  let reminders = this.subject({date: 'Tue Feb 07 2017 02:43:02 GMT-0700 (MST)'});
   assert.equal(reminders.get('date'), 'Tue Feb 07 2017 02:43:02 GMT-0700 (MST)', 'this is the reminder date')
+});
+
+test('each reminder should have a note', function(assert) {
+  let reminders = this.subject({notes: 'some more lorem ipsum'});
   assert.equal(reminders.get('notes'), 'some more lorem ipsum', 'this is the reminder note')
 });
