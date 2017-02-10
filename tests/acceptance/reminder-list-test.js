@@ -14,7 +14,7 @@ test('viewing the homepage', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/reminders');
-    assert.equal(Ember.$('.spec-reminder-item').length, 5);
+    assert.equal(find('.spec-reminder-item').length, 5);
   });
 });
 
@@ -26,7 +26,7 @@ test('clicking on an individual item', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/reminders/1');
-    assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
+    assert.equal(find('.spec-reminder-item:first').text().trim(), find('.spec-reminder-title').text().trim());
   });
 });
 
