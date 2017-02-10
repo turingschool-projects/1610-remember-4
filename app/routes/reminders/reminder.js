@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function(params) {
-    return this.modelFor('reminder')
+  model(params){
+    return this.get('store').findRecod('reminder', params.reminder_id)
   }
 });

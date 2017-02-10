@@ -48,6 +48,7 @@ test('clicking on an individual reminder renders the correct title element', fun
   click('.spec-reminder-item:first');
 
   andThen(function() {
+    assert.equal(currentURL(), '/reminders/1');
     assert.equal(find('h2').text().trim(), find('.spec-reminder-item:first').text().trim());
   });
 });
