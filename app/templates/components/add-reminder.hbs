@@ -1,5 +1,4 @@
 {{!-- {{outlet}} --}}
-
 <form class="add-reminder-form" {{action 'addReminder' on="submit"}}>
   <label>
     Title:
@@ -13,6 +12,5 @@
     Notes:
     {{input class='notes-input' type='text' value=notes}}
   </label>
-    Submit:
-  {{input class="add-reminder-btn" type='submit'}}
+  <button {{action 'addReminder'}}>Submit</button>
 </form>
