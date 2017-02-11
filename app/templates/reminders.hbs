@@ -2,17 +2,17 @@
 
 
 {{#each model as |reminder|}}
-  <div>
+  <div class='reminder'>
     {{#link-to 'reminders.reminder' reminder}}
-      <h3 class='spec-reminder-item'>{{reminder.title}}</h3>
+      <h3 class='spec-reminder-title'>{{reminder.title}}</h3>
     {{/link-to}}
-    <p>{{reminder.date}}</p>
-    <p>{{reminder.notes}}</p>
+    <p class= 'spec-reminder-date'>{{reminder.date}}</p>
+    <p class= 'spec-reminder-notes'>{{reminder.notes}}</p>
   </div>
 {{/each}}
 
 {{#link-to 'reminders.add-reminder'}}
-    Add New Reminder
+  <h3 class='spec-add-new'>  Add New Reminder</h3>
 {{/link-to}}
 
 {{outlet}}
