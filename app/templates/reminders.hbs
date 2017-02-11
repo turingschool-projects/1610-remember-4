@@ -1,7 +1,6 @@
 <h1>remEMBER</h1>
 
 {{#if model}}
-
   {{#each model as |reminder|}}
     <div class='reminder'>
       {{#link-to 'reminders.reminder' reminder}}
@@ -11,13 +10,9 @@
       <p class='spec-reminder-notes'>{{reminder.notes}}</p>
     </div>
   {{/each}}
-
 {{else}}
-
   <p class='user-message'> You have no reminders. Please add some! </p>
-
 {{/if}}
-
   {{#link-to 'reminders.add-reminder'}}
     <button class='spec-add-new'>Add New Reminder</button>
   {{/link-to}}
