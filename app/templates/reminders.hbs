@@ -1,5 +1,6 @@
 <h1>remEMBER</h1>
 
+
 {{#each model as |reminder|}}
   <div>
     {{#link-to 'reminders.reminder' reminder}}
@@ -10,4 +11,8 @@
   </div>
 {{/each}}
 
+{{#link-to 'reminders.new'}}
+    Add New Reminder
+{{/link-to}}
+{{add-reminder}}
 {{outlet}}
