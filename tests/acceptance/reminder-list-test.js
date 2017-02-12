@@ -31,10 +31,10 @@ test('clicking on an individual item', function(assert) {
 });
 
 test('clicking on an individual item adds a class of active', function(assert) {
-    server.createList('reminder', 5);
+  server.createList('reminder', 5);
 
-    visit('/');
-    click('.spec-reminder-title:first');
+  visit('/');
+  click('.spec-reminder-title:first');
 
   andThen(function() {
     assert.equal(find('.active').length, 1);
@@ -55,16 +55,17 @@ test('clicking on an individual reminder renders the correct title element', fun
 
 test('clicking on add new reminder will take us to /new', function(assert){
   server.createList('reminder',5);
+  
   visit('/');
   click('.spec-add-new');
 
   andThen(function(){
     assert.equal(currentURL(), '/reminders/new');
-    assert.equal(find('.reminder').length,5)
+    assert.equal(find('.reminder').length, 5)
   });
 });
 
-test('user should be able to create a new reminder', function(assert){
+test('user should be able to create a new reminder', function(assert) {
   visit('/');
   click('.spec-add-new');
 
@@ -82,3 +83,29 @@ test('user should be able to create a new reminder', function(assert){
     assert.equal(find('.spec-reminder-notes').text().trim(), 'Fido is a good dog', 'should show notes');
     })
   })
+
+test('homepage will show zero reminders if user has no reminders list', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    assert.equal(find('.reminder').length, 0);
+    assert.equal(find('.user-message').text().trim(), 'You have no reminders. Please add some!')
+  })
+})
+
+test('user message disappears if a user adds a new reminder', function(assert) {
+  visit('/');
+  click('.spec-add-new');
+
+  andThen(function() {
+    fillIn('.title-input', 'walk dog');
+    fillIn('.date-input', 'today');
+    fillIn('.notes-input', 'Fido is a good dog');
+    click('.submit-new-btn');
+  })
+
+  andThen(function() {
+    assert.equal(find('.user-message').text().trim(), '')
+    assert.equal(find('.reminder').length, 1)
+  })
+})

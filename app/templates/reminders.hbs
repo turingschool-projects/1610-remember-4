@@ -1,18 +1,20 @@
 <h1>remEMBER</h1>
 
-
-{{#each model as |reminder|}}
-  <div class='reminder'>
-    {{#link-to 'reminders.reminder' reminder}}
-      <h3 class='spec-reminder-title'>{{reminder.title}}</h3>
-    {{/link-to}}
-    <p class= 'spec-reminder-date'>{{reminder.date}}</p>
-    <p class= 'spec-reminder-notes'>{{reminder.notes}}</p>
-  </div>
-{{/each}}
-
-{{#link-to 'reminders.add-reminder'}}
-  <button class='spec-add-new'>Add New Reminder</button>
-{{/link-to}}
+{{#if model}}
+  {{#each model as |reminder|}}
+    <div class='reminder'>
+      {{#link-to 'reminders.reminder' reminder}}
+        <h3 class='spec-reminder-title'>{{reminder.title}}</h3>
+      {{/link-to}}
+      <p class='spec-reminder-date'>{{reminder.date}}</p>
+      <p class='spec-reminder-notes'>{{reminder.notes}}</p>
+    </div>
+  {{/each}}
+{{else}}
+  <p class='user-message'> You have no reminders. Please add some! </p>
+{{/if}}
+  {{#link-to 'reminders.add-reminder'}}
+    <button class='spec-add-new'>Add New Reminder</button>
+  {{/link-to}}
 
 {{outlet}}
