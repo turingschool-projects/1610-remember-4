@@ -6,13 +6,14 @@ export default Ember.Component.extend({
   tagName: 'section',
   classNames: ['edit-reminder'],
 
-  title: '',
-  date: '',
-  notes: '',
+  editable: false,
 
   actions: {
     editReminder() {
       console.log('hi');
+      const reminder = this.getProperties('editable');
+      this.setProperties({editable: true})
+      console.log(this.editable);
     }
   }
 });
