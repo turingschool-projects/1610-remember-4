@@ -3,5 +3,6 @@
 <p>{{input value=model.date}}</p>
 <p>{{input value=model.notes}}</p>
 
-
-<button class='edit-reminder-btn' {{action 'editReminder' on='click'}}>Save</button>
+{{#link-to 'reminders'}}
+<button class='save-reminder-btn'>Save</button>
+{{/link-to}}
