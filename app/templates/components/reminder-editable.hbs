@@ -1,0 +1,8 @@
+<div>
+  <h2 class='new-reminder-title'> {{model.title}} </h2>
+  <p class='new-reminder-date'> {{model.date}} </p>
+  <p class='new-reminder-notes'> {{model.notes}} </p>
+  {{#link-to 'reminders.reminder.edit-reminder'}}
+    <button class='edit-reminder-btn' {{action 'editReminder' on='click'}}>Edit</button>
+  {{/link-to}}
+</div>
