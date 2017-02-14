@@ -2,7 +2,6 @@
 
 import { test } from 'qunit';
 import moduleForAcceptance from 'remember/tests/helpers/module-for-acceptance';
-
 import Ember from 'ember';
 
 moduleForAcceptance('Acceptance | reminders list');
@@ -144,6 +143,10 @@ test('user should be able to edit the reminder', function(assert) {
     assert.equal(find('.edit-notes input').val(), 'Has got it going on, too', 'notes value is correct');
   })
 
+  andThen(function(){
+    assert.equal(find('.edited-reminder').hasDirtyAttributes)
+  })
+  
   click('.save-reminder-btn');
 
   andThen(function(){
@@ -169,6 +172,10 @@ test('user should be able to revert an unsaved edit', function(assert){
   fillIn('.edit-title input', 'What did the ocean say to the penguin');
   fillIn('.edit-date input', '???');
   fillIn('.edit-notes input', 'Nothing, it just waved');
+
+  andThen(function(){
+    assert.equal(find('.edited-reminder').hasDirtyAttributes)
+  })
 
   andThen(function(){
     assert.equal(find('.edit-title input').val(), 'What did the ocean say to the penguin', 'title value is correct');
