@@ -1,3 +1,15 @@
 .active {
+  color: green;
+}
+.dirty-pop{
+  background-color: red;
+}
+.dirty-deeds{
   color: red;
+}
+
+button{
+  text-decoration: none;
+  border:none;
+  margin: 10px;
 }
