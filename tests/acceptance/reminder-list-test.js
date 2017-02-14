@@ -127,20 +127,21 @@ test('user should be able to edit the reminder', function(assert) {
     assert.equal(currentURL(),'/reminders/1');
   })
 
+  visit('/reminders/1')
   click('.edit-reminder-btn')
 
   andThen(function(){
     assert.equal(currentURL(),'/reminders/1/edit');
   })
 
-  fillIn('.edit-title', 'Brennas mom');
-  fillIn('.edit-date', 'always');
-  fillIn('.edit-notes', 'Has got it going on, too');
+  fillIn('.edit-title input', 'Brennas mom');
+  fillIn('.edit-date input', 'always');
+  fillIn('.edit-notes input', 'Has got it going on, too');
 
   andThen(function(){
-    assert.equal(find('.edit-title').val(), 'Brennas mom', 'title value is correct');
-    assert.equal(find('.edit-date').val(), 'always', 'date value is correct');
-    assert.equal(find('.edit-notes').val(), 'Has got it going on, too', 'notes value is correct');
+    assert.equal(find('.edit-title input').val(), 'Brennas mom', 'title value is correct');
+    assert.equal(find('.edit-date input').val(), 'always', 'date value is correct');
+    assert.equal(find('.edit-notes input').val(), 'Has got it going on, too', 'notes value is correct');
   })
 
   click('.save-reminder-btn');
