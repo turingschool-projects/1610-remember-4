@@ -4,5 +4,4 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   date:  DS.attr('string'),
   notes: DS.attr('string'),
-  editable: false
 });

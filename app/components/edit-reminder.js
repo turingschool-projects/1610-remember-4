@@ -5,7 +5,10 @@ export default Ember.Component.extend({
 
   actions: {
     saveDirtyDiana() {
-      console.log('hi');
+      this.get('store').findRecord('reminder', this.model.id).then(reminder => {
+        console.log(reminder);
+        reminder.save()
+      })
     }
   }
-});
+})
