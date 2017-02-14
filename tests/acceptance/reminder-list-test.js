@@ -18,9 +18,6 @@ test('viewing the homepage', function(assert) {
   });
 });
 
-//This test is now failing and we don't understand why. It seems like it doesn't have access to the title.
-//When we check the actual application the class names are there and they corrospond to the correct element.
-//This test was passing earlier today and we didn't make any changes to this file today.
 test('clicking on an individual item', function(assert) {
   server.createList('reminder', 5);
 
@@ -29,7 +26,7 @@ test('clicking on an individual item', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/reminders/1');
-    assert.equal(find('.spec-reminder-title:first').text().trim(), find('.new-reminder-title').text().trim());
+    assert.equal(find('.view-title').text().trim(), find('.spec-reminder-title:first').text().trim());
   });
 });
 
@@ -44,9 +41,6 @@ test('clicking on an individual item adds a class of active', function(assert) {
   });
 });
 
-//This test is now failing and we don't understand why. It seems like it doesn't have access to the title.
-//When we check the actual application the class names are there and they corrospond to the correct element.
-//This test was passing earlier today and we didn't make any changes to this file today.
 test('clicking on an individual reminder renders the correct title element', function(assert) {
   server.createList('reminder', 5);
 
@@ -55,7 +49,7 @@ test('clicking on an individual reminder renders the correct title element', fun
 
   andThen(function() {
     assert.equal(currentURL(), '/reminders/1');
-    assert.equal(find('h2').text().trim(), find('.spec-reminder-title:first').text().trim());
+    assert.equal(find('.view-title').text().trim(), find('.spec-reminder-title:first').text().trim());
   });
 });
 
@@ -77,11 +71,12 @@ test('user should be able to create a new reminder', function(assert) {
 
   andThen(function(){
     assert.equal(currentURL(),'/reminders/new');
-    fillIn('.title-input', 'walk dog');
-    fillIn('.date-input', 'today');
-    fillIn('.notes-input', 'Fido is a good dog');
-    click('.submit-new-btn');
   })
+
+  fillIn('.title-input', 'walk dog');
+  fillIn('.date-input', 'today');
+  fillIn('.notes-input', 'Fido is a good dog');
+  click('.submit-new-btn');
 
   andThen(function(){
     assert.equal(find('.spec-reminder-title').text().trim(), 'walk dog', 'should show title');
@@ -103,12 +98,10 @@ test('user message disappears if a user adds a new reminder', function(assert) {
   visit('/');
   click('.spec-add-new');
 
-  andThen(function() {
-    fillIn('.title-input', 'walk dog');
-    fillIn('.date-input', 'today');
-    fillIn('.notes-input', 'Fido is a good dog');
-    click('.submit-new-btn');
-  })
+  fillIn('.title-input', 'walk dog');
+  fillIn('.date-input', 'today');
+  fillIn('.notes-input', 'Fido is a good dog');
+  click('.submit-new-btn');
 
   andThen(function() {
     assert.equal(find('.user-message').text().trim(), '')
@@ -122,36 +115,33 @@ test('user should be able to edit the reminder', function(assert) {
 
   andThen(function(){
     assert.equal(currentURL(),'/reminders/new');
-    fillIn('.title-input', 'Taylors mom');
-    fillIn('.date-input', 'always');
-    fillIn('.notes-input', 'Has got it going on');
-    click('.submit-new-btn');
   })
 
+  fillIn('.title-input', 'Taylors mom');
+  fillIn('.date-input', 'always');
+  fillIn('.notes-input', 'Has got it going on');
+  click('.submit-new-btn');
   click('.spec-reminder-title:first');
 
   andThen(function(){
     assert.equal(currentURL(),'/reminders/1');
-    click('.edit-reminder-btn')
   })
+
+  click('.edit-reminder-btn')
 
   andThen(function(){
     assert.equal(currentURL(),'/reminders/1/edit');
   })
 
-  andThen(function(){
-    fillIn('.edit-title', 'Brennas mom');
-    fillIn('.edit-date', 'always');
-    fillIn('.edit-notes', 'Has got it going on, too');
-    click('.save-reminder-btn');
-  })
+  fillIn('.edit-title', 'Brennas mom');
+  fillIn('.edit-date', 'always');
+  fillIn('.edit-notes', 'Has got it going on, too');
+  click('.save-reminder-btn');
 
   andThen(function(){
     assert.equal(currentURL(), '/reminders');
   })
-//This last andThen does not pass. Everything above does. I thought it might be the same issue as the above tests
-//because it involves the spec-reminder-title, etc classes. Once again, in the app everything works fine and when we
-//hover over the new titles, etc with the inspector, they all have the correct class names with the corrosponding item.
+
   andThen(function(){
     assert.equal(find('.spec-reminder-title').text().trim(), 'Brennas mom', 'should show new title');
     assert.equal(find('.spec-reminder-date').text().trim(), 'always', 'should show new date');

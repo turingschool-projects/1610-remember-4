@@ -1,7 +1,7 @@
 <p> remember to save your changes! </p>
-<h3>{{input value=model.title}}</h3>
-<p>{{input value=model.date}}</p>
-<p>{{input value=model.notes}}</p>
+<h2 class='display-input'>{{input value=model.title}}</h2>
+<p class='display-date'>{{input value=model.date}}</p>
+<p class='display-notes'>{{input value=model.notes}}</p>
 
 {{#link-to 'reminders' model.id}}
   <button class='save-reminder-btn' {{action 'saveDirtyDiana' on='click'}}>Save</button>
