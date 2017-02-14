@@ -6,7 +6,6 @@ export default Ember.Component.extend({
   actions: {
     saveDirtyDiana() {
       this.get('store').findRecord('reminder', this.model.id).then(reminder => {
-        console.log(reminder);
         reminder.save()
       })
     }
