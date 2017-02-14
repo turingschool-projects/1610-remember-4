@@ -18,7 +18,7 @@ test('viewing the homepage', function(assert) {
   });
 });
 
-test('clicking on an individual item', function(assert) {
+test('clicking on a reminder displays the title', function(assert) {
   server.createList('reminder', 5);
 
   visit('/');
@@ -26,7 +26,7 @@ test('clicking on an individual item', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/reminders/1');
-    assert.equal(find('.spec-reminder-title:first').text().trim(), find('.new-reminder-title').text().trim());
+    assert.equal(find('.view-title').text().trim(), find('.spec-reminder-title:first').text().trim());
   });
 });
 
@@ -49,13 +49,13 @@ test('clicking on an individual reminder renders the correct title element', fun
 
   andThen(function() {
     assert.equal(currentURL(), '/reminders/1');
-    assert.equal(find('h2').text().trim(), find('.spec-reminder-title:first').text().trim());
+    assert.equal(find('.view-title').text().trim(), find('.spec-reminder-title:first').text().trim());
   });
 });
 
 test('clicking on add new reminder will take us to /new', function(assert){
   server.createList('reminder',5);
-  
+
   visit('/');
   click('.spec-add-new');
 
@@ -71,11 +71,12 @@ test('user should be able to create a new reminder', function(assert) {
 
   andThen(function(){
     assert.equal(currentURL(),'/reminders/new');
-    fillIn('.title-input', 'walk dog');
-    fillIn('.date-input', 'today');
-    fillIn('.notes-input', 'Fido is a good dog');
-    click('.submit-new-btn');
   })
+
+  fillIn('.title-input', 'walk dog');
+  fillIn('.date-input', 'today');
+  fillIn('.notes-input', 'Fido is a good dog');
+  click('.submit-new-btn');
 
   andThen(function(){
     assert.equal(find('.spec-reminder-title').text().trim(), 'walk dog', 'should show title');
@@ -97,15 +98,61 @@ test('user message disappears if a user adds a new reminder', function(assert) {
   visit('/');
   click('.spec-add-new');
 
-  andThen(function() {
-    fillIn('.title-input', 'walk dog');
-    fillIn('.date-input', 'today');
-    fillIn('.notes-input', 'Fido is a good dog');
-    click('.submit-new-btn');
-  })
+  fillIn('.title-input', 'walk dog');
+  fillIn('.date-input', 'today');
+  fillIn('.notes-input', 'Fido is a good dog');
+  click('.submit-new-btn');
 
   andThen(function() {
     assert.equal(find('.user-message').text().trim(), '')
     assert.equal(find('.reminder').length, 1)
+  })
+})
+
+test('user should be able to edit the reminder', function(assert) {
+  visit('/');
+  click('.spec-add-new');
+
+  andThen(function(){
+    assert.equal(currentURL(),'/reminders/new');
+  })
+
+  fillIn('.title-input', 'Taylors mom');
+  fillIn('.date-input', 'always');
+  fillIn('.notes-input', 'Has got it going on');
+  click('.submit-new-btn');
+  click('.spec-reminder-title:first');
+
+  andThen(function(){
+    assert.equal(currentURL(),'/reminders/1');
+  })
+
+  visit('/reminders/1')
+  click('.edit-reminder-btn')
+
+  andThen(function(){
+    assert.equal(currentURL(),'/reminders/1/edit');
+  })
+
+  fillIn('.edit-title input', 'Brennas mom');
+  fillIn('.edit-date input', 'always');
+  fillIn('.edit-notes input', 'Has got it going on, too');
+
+  andThen(function(){
+    assert.equal(find('.edit-title input').val(), 'Brennas mom', 'title value is correct');
+    assert.equal(find('.edit-date input').val(), 'always', 'date value is correct');
+    assert.equal(find('.edit-notes input').val(), 'Has got it going on, too', 'notes value is correct');
+  })
+
+  click('.save-reminder-btn');
+
+  andThen(function(){
+    assert.equal(currentURL(), '/reminders/1');
+  })
+
+  andThen(function(){
+    assert.equal(find('.spec-reminder-title').text().trim(), 'Brennas mom', 'should show new title');
+    assert.equal(find('.spec-reminder-date').text().trim(), 'always', 'should show new date');
+    assert.equal(find('.spec-reminder-notes').text().trim(), 'Has got it going on, too', 'should show new notes');
   })
 })
