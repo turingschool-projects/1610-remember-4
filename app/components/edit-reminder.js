@@ -8,6 +8,11 @@ export default Ember.Component.extend({
       this.get('store').findRecord('reminder', this.model.id).then(reminder => {
         reminder.save()
       })
+    },
+    rollBackTheRock(){
+      this.get('store').findRecord('reminder', this.model.id).then(reminder =>{
+        reminder.rollbackAttributes()
+      })
     }
   }
 })

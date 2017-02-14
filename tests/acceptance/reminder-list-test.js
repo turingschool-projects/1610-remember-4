@@ -156,3 +156,31 @@ test('user should be able to edit the reminder', function(assert) {
     assert.equal(find('.spec-reminder-notes').text().trim(), 'Has got it going on, too', 'should show new notes');
   })
 })
+
+test('user should be able to revert an unsaved edit', function(assert){
+  visit('/reminders/new')
+
+  fillIn('.title-input', 'How do you find Will Smith in the snow')
+  fillIn('.date-input', '???');
+  fillIn('.notes-input', 'You look for the fresh prints')
+  click('.submit-new-btn')
+  click('.spec-reminder-title:first')
+  click('.edit-reminder-btn')
+  fillIn('.edit-title input', 'What did the ocean say to the penguin');
+  fillIn('.edit-date input', '???');
+  fillIn('.edit-notes input', 'Nothing, it just waved');
+
+  andThen(function(){
+    assert.equal(find('.edit-title input').val(), 'What did the ocean say to the penguin', 'title value is correct');
+    assert.equal(find('.edit-date input').val(), '???', 'date value is correct');
+    assert.equal(find('.edit-notes input').val(), 'Nothing, it just waved', 'notes value is correct');
+  })
+
+  click('.undo-btn')
+
+  andThen(function(){
+    assert.equal(find('.edit-title input').val(), 'How do you find Will Smith in the snow', 'title value is reverted');
+    assert.equal(find('.edit-date input').val(), '???', 'date value is reverted');
+    assert.equal(find('.edit-notes input').val(), 'You look for the fresh prints', 'notes value reverted');
+  })
+})
