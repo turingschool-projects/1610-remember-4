@@ -18,7 +18,7 @@ test('viewing the homepage', function(assert) {
   });
 });
 
-test('clicking on an individual item', function(assert) {
+test('clicking on a reminder displays the title', function(assert) {
   server.createList('reminder', 5);
 
   visit('/');
@@ -136,10 +136,17 @@ test('user should be able to edit the reminder', function(assert) {
   fillIn('.edit-title', 'Brennas mom');
   fillIn('.edit-date', 'always');
   fillIn('.edit-notes', 'Has got it going on, too');
+
+  andThen(function(){
+    assert.equal(find('.edit-title').val(), 'Brennas mom', 'title value is correct');
+    assert.equal(find('.edit-date').val(), 'always', 'date value is correct');
+    assert.equal(find('.edit-notes').val(), 'Has got it going on, too', 'notes value is correct');
+  })
+
   click('.save-reminder-btn');
 
   andThen(function(){
-    assert.equal(currentURL(), '/reminders');
+    assert.equal(currentURL(), '/reminders/1');
   })
 
   andThen(function(){
