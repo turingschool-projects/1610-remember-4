@@ -30,13 +30,17 @@ test('clicking on a reminder displays the title', function(assert) {
 });
 
 test('clicking on an individual item adds a class of active', function(assert) {
-  server.createList('reminder', 5);
-
   visit('/');
-  click('.spec-reminder-title:first');
+  click('.spec-add-new');
 
+  fillIn('.title-input', 'walk dog');
+  fillIn('.date-input', 'today');
+  fillIn('.notes-input', 'Fido is a good dog');
+  click('.submit-new-btn');
+  click('.spec-reminder-title:first');
   andThen(function() {
-    assert.equal(find('.active').length, 1);
+
+    assert.equal(find('.spec-reminder-title:first, active').length, 1);
   });
 });
 
@@ -223,5 +227,32 @@ test('the save and undo button will reflect unsaved changes', function(assert){
   andThen(function(){
     assert.equal(find('.dirty-pop').length, 0);
     assert.equal(find('.dirty-deeds').length,0)
+  })
+})
+test('user will be able to delete a reminder', function(assert){
+  visit('/');
+  click('.spec-add-new');
+
+  andThen(function(){
+    assert.equal(currentURL(),'/reminders/new');
+  })
+
+  fillIn('.title-input', 'What do you get when you put root beer in a square glass');
+  fillIn('.date-input', '??????????');
+  fillIn('.notes-input', 'Beer!');
+  click('.submit-new-btn');
+  click('.spec-reminder-title:first');
+
+  andThen(function(){
+    assert.equal(currentURL(),'/reminders/1')
+  })
+  click('.remove-reminder')
+
+  andThen(function(){
+    assert.equal(currentURL(), '/reminders')
+  })
+
+  andThen(function(){
+    assert.equal(find('.spec-reminder-item').length, 0, 'should not have any reminders');
   })
 })
