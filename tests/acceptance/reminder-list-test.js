@@ -39,7 +39,8 @@ test('clicking on an individual item adds a class of active', function(assert) {
   click('.submit-new-btn');
   click('.spec-reminder-title:first');
   andThen(function() {
-    assert.equal(find('.active').length, 1);
+
+    assert.equal(find('.spec-reminder-title:first, active').length, 1);
   });
 });
 
@@ -250,7 +251,7 @@ test('user will be able to delete a reminder', function(assert){
   andThen(function(){
     assert.equal(currentURL(), '/reminders')
   })
-  
+
   andThen(function(){
     assert.equal(find('.spec-reminder-item').length, 0, 'should not have any reminders');
   })
