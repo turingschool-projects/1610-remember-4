@@ -18,7 +18,7 @@ body {
 }
 
 .link:hover, button:hover {
-  color: #44B4D5;
+  color: darkviolet;
 }
 
 button{
@@ -66,7 +66,7 @@ button{
   border: 1px solid black;
   box-shadow: 5px 5px 3px #888888;
   margin-left: 20px;
-  background-color: #FDFDF0;
+  background-color: lavender;
   margin-right: 50px;
 }
 
@@ -79,4 +79,8 @@ button{
 
 .edit-title, .edit-date, .edit-notes, .save-changes-note {
   padding-left: 10px;
+}
+
+.title-input, .date-input, .notes-input {
+  box-shadow: 1px 1px 2px white, 0 0 10px mediumpurple, 0 0 2px blueviolet;
 }
