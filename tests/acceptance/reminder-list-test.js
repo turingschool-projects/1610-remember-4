@@ -143,10 +143,6 @@ test('user should be able to edit the reminder', function(assert) {
     assert.equal(find('.edit-notes input').val(), 'Has got it going on, too', 'notes value is correct');
   })
 
-  andThen(function(){
-    assert.equal(find('.edited-reminder').hasDirtyAttributes)
-  })
-  
   click('.save-reminder-btn');
 
   andThen(function(){
@@ -174,10 +170,6 @@ test('user should be able to revert an unsaved edit', function(assert){
   fillIn('.edit-notes input', 'Nothing, it just waved');
 
   andThen(function(){
-    assert.equal(find('.edited-reminder').hasDirtyAttributes)
-  })
-
-  andThen(function(){
     assert.equal(find('.edit-title input').val(), 'What did the ocean say to the penguin', 'title value is correct');
     assert.equal(find('.edit-date input').val(), '???', 'date value is correct');
     assert.equal(find('.edit-notes input').val(), 'Nothing, it just waved', 'notes value is correct');
@@ -189,5 +181,47 @@ test('user should be able to revert an unsaved edit', function(assert){
     assert.equal(find('.edit-title input').val(), 'How do you find Will Smith in the snow', 'title value is reverted');
     assert.equal(find('.edit-date input').val(), '???', 'date value is reverted');
     assert.equal(find('.edit-notes input').val(), 'You look for the fresh prints', 'notes value reverted');
+  })
+})
+
+test('the save and undo button will reflect unsaved changes', function(assert){
+  visit('/');
+  click('.spec-add-new');
+
+  andThen(function(){
+    assert.equal(currentURL(),'/reminders/new');
+  })
+
+  fillIn('.title-input', 'Did you hear about the cheese factory that exploded in France');
+  fillIn('.date-input', '??????????');
+  fillIn('.notes-input', 'There was nothing left but de brie!');
+  click('.submit-new-btn');
+  click('.spec-reminder-title:first');
+
+  andThen(function(){
+    assert.equal(currentURL(),'/reminders/1');
+  })
+
+  visit('/reminders/1')
+  click('.edit-reminder-btn')
+
+  andThen(function(){
+    assert.equal(currentURL(),'/reminders/1/edit');
+  })
+
+  fillIn('.edit-title input', 'But I am le tired');
+  fillIn('.edit-date input', '!!!');
+  fillIn('.edit-notes input', 'Well have a nap, THEN FIRE ZE MISSLES!');
+
+  andThen(function(){
+    assert.equal(find('.dirty-pop').length, 2);
+    assert.equal(find('.dirty-deeds').length,1)
+  })
+
+  click('.save-reminder-btn')
+
+  andThen(function(){
+    assert.equal(find('.dirty-pop').length, 0);
+    assert.equal(find('.dirty-deeds').length,0)
   })
 })
