@@ -4,11 +4,11 @@
   {{#each model as |reminder|}}
     <div class='reminder'>
       {{#link-to 'reminders.reminder' reminder.id}}
-      {{#if reminder.hasDirtyAttributes}}
-      <h3 class='spec-reminder-title dirty-deeds'>{{reminder.title}}</h3>
-      {{else}}
-      <h3 class='spec-reminder-title'>{{reminder.title}}</h3>
-      {{/if}}
+        {{#if reminder.hasDirtyAttributes}}
+          <h3 class='spec-reminder-title dirty-deeds'>{{reminder.title}}</h3>
+        {{else}}
+          <h3 class='spec-reminder-title'>{{reminder.title}}</h3>
+        {{/if}}
       {{/link-to}}
       <p class='spec-reminder-date'>{{reminder.date}}</p>
       <p class='spec-reminder-notes'>{{reminder.notes}}</p>
@@ -17,8 +17,9 @@
 {{else}}
   <p class='user-message'> You have no reminders. Please add some! </p>
 {{/if}}
-  {{#link-to 'reminders.add-reminder'}}
-    <button class='spec-add-new'>Add New Reminder</button>
-  {{/link-to}}
+
+{{#link-to 'reminders.add-reminder'}}
+  <button class='spec-add-new'>Add New Reminder</button>
+{{/link-to}}
 
 {{outlet}}

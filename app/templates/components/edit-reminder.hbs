@@ -1,8 +1,6 @@
-
-
 {{#if model.hasDirtyAttributes}}
-{{#link-to 'reminders.reminder'}}
-  <button class='save-reminder-btn dirty-pop' {{action 'saveDirtyDiana' on='click'}}>Save</button>
-{{/link-to}}
-<button class='undo-btn dirty-pop' {{action 'rollBackTheRock' on='click'}}>Undo</button>
+  {{#link-to 'reminders.reminder'}}
+    <button class='save-reminder-btn dirty-pop' {{action 'saveDirtyDiana' on='click'}}>Save</button>
+  {{/link-to}}
+  <button class='undo-btn dirty-pop' {{action 'rollBackTheRock' on='click'}}>Undo</button>
 {{/if}}

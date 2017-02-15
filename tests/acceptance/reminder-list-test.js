@@ -143,10 +143,6 @@ test('user should be able to edit the reminder', function(assert) {
     assert.equal(find('.edit-notes input').val(), 'Has got it going on, too', 'notes value is correct');
   })
 
-  andThen(function(){
-    assert.equal(find('.edited-reminder').hasDirtyAttributes)
-  })
-
   click('.save-reminder-btn');
 
   andThen(function(){
@@ -172,10 +168,6 @@ test('user should be able to revert an unsaved edit', function(assert){
   fillIn('.edit-title input', 'What did the ocean say to the penguin');
   fillIn('.edit-date input', '???');
   fillIn('.edit-notes input', 'Nothing, it just waved');
-
-  andThen(function(){
-    assert.equal(find('.edited-reminder').hasDirtyAttributes)
-  })
 
   andThen(function(){
     assert.equal(find('.edit-title input').val(), 'What did the ocean say to the penguin', 'title value is correct');
@@ -222,7 +214,6 @@ test('the save and undo button will reflect unsaved changes', function(assert){
   fillIn('.edit-notes input', 'Well have a nap, THEN FIRE ZE MISSLES!');
 
   andThen(function(){
-    assert.equal(find('.edited-reminder').hasDirtyAttributes)
     assert.equal(find('.dirty-pop').length, 2);
     assert.equal(find('.dirty-deeds').length,1)
   })
@@ -230,7 +221,6 @@ test('the save and undo button will reflect unsaved changes', function(assert){
   click('.save-reminder-btn')
 
   andThen(function(){
-    assert.equal(find('.edited-reminder').hasDirtyAttributes)
     assert.equal(find('.dirty-pop').length, 0);
     assert.equal(find('.dirty-deeds').length,0)
   })
