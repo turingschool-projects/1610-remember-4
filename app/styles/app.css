@@ -1,15 +1,74 @@
 .active {
-  color: green;
+  color: #72FE95;
 }
 .dirty-pop{
-  background-color: red;
+  background-color: #ffb2b2;
+  margin: 10px
 }
 .dirty-deeds{
-  color: red;
+  color: #FF7575;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover, button:hover {
+  color: #44B4D5;
 }
 
 button{
   text-decoration: none;
   border:none;
   margin: 10px;
+  background-color: white;
+  border: 1px solid black;
+  font-family: quicksand;
+  font-size: 12px;
+  font-weight: 700;
+  outline: none;
+}
+
+.project-title {
+  font-family: quicksand;
+  font-size: 36px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.spec-reminder-date, .spec-reminder-notes {
+  font-family: shadows into light;
+  font-size: 18px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.spec-reminder-title {
+  font-family: shadows into light;
+  font-size: 24px;
+  font-weight: bolder;
+  word-wrap: break-word;
+}
+
+.left {
+  float: left;
+  width: 100%;
+}
+
+.right {
+  float: right;
+  width: 50%;
+  border: 1px solid black;
+  box-shadow: 5px 5px 3px #888888;
+  margin-left: 20px;
+  background-color: #FDFDF0;
+}
+
+.view-title, .view-date, .view-notes {
+  padding-left: 10px;
+  word-wrap: break-word;
+}
+
+.edit-title, .edit-date, .edit-notes, .save-changes-note {
+  padding-left: 10px;
 }

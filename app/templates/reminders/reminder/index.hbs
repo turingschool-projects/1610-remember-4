@@ -1,6 +1,8 @@
-<h3 class='view-title'>{{model.title}}</h3>
-<p class='view-date'>{{model.date}}</p>
-<p class='view-notes'>{{model.notes}}</p>
-{{reminder-editable model=model}}
+<div class='right'>
+  <h3 class='view-title'>{{model.title}}</h3>
+  <p class='view-date'>{{model.date}}</p>
+  <p class='view-notes'>{{model.notes}}</p>
+  {{reminder-editable model=model}}
+</div>
 
 {{outlet}}
