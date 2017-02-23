@@ -1,7 +1,9 @@
-<p> remember to save your changes! </p>
-<div class='edited-reminder' >
-  <h3 class='edit-title'>{{input value=model.title}}</h3>
-  <p class='edit-date'>{{input value=model.date}}</p>
-  <p class='edit-notes'>{{input value=model.notes}}</p>
+<div class='right'>
+  <p class='save-changes-note'> remember to save your changes! </p>
+  <div class='edited-reminder' >
+    <h3 class='edit-title'>{{input value=model.title}}</h3>
+    <p class='edit-date'>{{input value=model.date}}</p>
+    <p class='edit-notes'>{{input value=model.notes}}</p>
+  </div>
+  {{edit-reminder model=model}}
 </div>
-{{edit-reminder model=model}}

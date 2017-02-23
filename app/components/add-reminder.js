@@ -3,13 +3,6 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   store: Ember.inject.service(),
 
-  tagName: 'section',
-  classNames: ['add-reminder'],
-
-  title: '',
-  date: '',
-  notes: '',
-
   actions: {
     addReminder() {
       const reminder = this.getProperties('title', 'date', 'notes');
